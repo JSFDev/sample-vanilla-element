@@ -1,0 +1,25 @@
+{
+  "name": "sample-vanilla-element",
+  "version": "0.0.0",
+  "homepage": "https://github.com/JSFDev/sample-vanilla-element",
+  "authors": [
+    "info@jsdev.cruzalosdedos.es"
+  ],
+  "description": "Sample custom element in vanilla Javascript",
+  "main": "index.html",
+  "keywords": [
+    "components"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendors",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "webcomponentsjs": "~0.7.20"
+  }
+}
