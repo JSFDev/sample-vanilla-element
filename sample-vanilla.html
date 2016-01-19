@@ -5,33 +5,33 @@
 <script>
 (function (w, d){
 
-var ElementVanilla = function () {
+var SampleVanilla = function () {
         this.dom = (d._currentScript || d.currentScript).ownerDocument;
         this.template =  this.dom.querySelector('template');
         this.__proto__.name = 'sample-vanilla';
     };
 
 // DOM events
-ElementVanilla.prototype.createdElementCallback = function () {
+SampleVanilla.prototype.createdElementCallback = function () {
     var shadowRoot = this.template.createShadowRoot(),
         templateRoot = this.dom.importNode(this.template.content);
 
     shadowRoot.appendChild(templateRoot);
 };
 
-ElementVanilla.prototype.createdAttributeCallback = function () {
+SampleVanilla.prototype.createdAttributeCallback = function () {
 
 };
 
-ElementVanilla.prototype.setAttributeCallback = function () {
+SampleVanilla.prototype.setAttributeCallback = function () {
 
 };
 
-ElementVanilla.prototype.attributeChangedCallback = function () {
+SampleVanilla.prototype.attributeChangedCallback = function () {
 
 };
 
-w.elementVanilla = new ElementVanilla();
+w.customElement = new SampleVanilla();
 
 })(window, document);
 </script>
