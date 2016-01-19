@@ -1,0 +1,37 @@
+<template>
+    <p>The simplest <b>web component</b> of the world</p>
+</template>
+
+<script>
+(function (w, d){
+
+var ElementVanilla = function () {
+        this.dom = (d._currentScript || d.currentScript).ownerDocument;
+        this.template =  this.dom.querySelector('template');
+        this.__proto__.name = 'sample-vanilla';
+    };
+
+// DOM events
+ElementVanilla.prototype.createdElementCallback = function () {
+    var shadowRoot = this.template.createShadowRoot(),
+        templateRoot = this.dom.importNode(this.template.content);
+
+    shadowRoot.appendChild(templateRoot);
+};
+
+ElementVanilla.prototype.createdAttributeCallback = function () {
+
+};
+
+ElementVanilla.prototype.setAttributeCallback = function () {
+
+};
+
+ElementVanilla.prototype.attributeChangedCallback = function () {
+
+};
+
+w.elementVanilla = new ElementVanilla();
+
+})(window, document);
+</script>
