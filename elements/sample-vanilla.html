@@ -1,0 +1,45 @@
+<template>
+    <h1 class="title">The simplest <b>web component</b> of the world</h1>
+</template>
+
+<script>
+(function (w, d){
+
+var SampleVanilla = function () {
+        this.dom = (d._currentScript || d.currentScript).ownerDocument;
+        this.template =  this.dom.querySelector('template');
+        this.__proto__.name = 'sample-vanilla';
+    };
+
+// Element Lifecycle
+SampleVanilla.prototype.createdElementCallback = function () {
+    var shadowRoot = this.template.createShadowRoot(),
+        templateRoot = this.dom.importNode(this.template.content, true);
+
+    shadowRoot.appendChild(templateRoot);
+    this.title = shadowRoot.querySelector('.title');
+
+    if (this.template.hasAttribute('copyright')) {
+    	this.copyright = this.template.getAttribute('copyright');
+    }
+};
+
+SampleVanilla.prototype.attributeChangedCallback = function (attr, oldVal, newVal) {
+	if (attr === 'copyright') {
+		this.copyright = newVal;
+	}
+};
+
+SampleVanilla.prototype.createdAttributeCallback = function () {
+
+};
+
+SampleVanilla.prototype.setAttributeCallback = function () {
+
+};
+
+w.customElement = new SampleVanilla();
+w.customElement.createdElementCallback();
+
+})(window, document);
+</script>

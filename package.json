@@ -17,5 +17,8 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/JSFDev/sample-vanilla-element/issues"
+  },
+  "devDependencies": {
+    "express": "~4.13.3"
   }
 }
