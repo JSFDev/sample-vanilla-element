@@ -1,45 +1,57 @@
 <template>
-    <h1 class="title">The simplest <b>web component</b> of the world</h1>
+    <h1>A sample of <i class="title">html</i> title.</h1>
 </template>
 
 <script>
 (function (w, d){
 
+// Element Prototype
 var SampleVanilla = function () {
         this.dom = (d._currentScript || d.currentScript).ownerDocument;
         this.template =  this.dom.querySelector('template');
-        this.__proto__.name = 'sample-vanilla';
+        this.shadowDom = null;
+        this.name = 'sample-vanilla';
     };
 
+SampleVanilla.prototype = Object.create(HTMLElement.prototype);
+SampleVanilla.prototype.constructor = SampleVanilla;
+
 // Element Lifecycle
-SampleVanilla.prototype.createdElementCallback = function () {
-    var shadowRoot = this.template.createShadowRoot(),
-        templateRoot = this.dom.importNode(this.template.content, true);
+SampleVanilla.prototype.createdCallback = function () {
+    var shadowRoot = this.createShadowRoot(),
+        templateRoot = d.importNode(this.template.content, true);
 
     shadowRoot.appendChild(templateRoot);
-    this.title = shadowRoot.querySelector('.title');
+    this.shadowDom = shadowRoot;
 
-    if (this.template.hasAttribute('copyright')) {
-    	this.copyright = this.template.getAttribute('copyright');
+    if (this.hasAttribute('title')) {
+      this.setElement('title', this.getAttribute('title'));
+    }
+
+    if (this.hasAttribute('copyright')) {
+      var el = document.createElement('div');
+      
+      el.classList.add('copyright');
+      shadowRoot.appendChild(el);
+      this.setElement('copyright', this.getAttribute('copyright'));
     }
 };
 
+// Element Binding
 SampleVanilla.prototype.attributeChangedCallback = function (attr, oldVal, newVal) {
-	if (attr === 'copyright') {
-		this.copyright = newVal;
-	}
+  this.setElement(attr, newVal);
 };
 
-SampleVanilla.prototype.createdAttributeCallback = function () {
-
+SampleVanilla.prototype.setElement = function (className, val) {
+  this.shadowDom.querySelector('.' + className).textContent = val;
 };
 
-SampleVanilla.prototype.setAttributeCallback = function () {
 
-};
-
+// Create custom Element
 w.customElement = new SampleVanilla();
-w.customElement.createdElementCallback();
+d.registerElement(w.customElement.name, {
+    prototype: w.customElement
+});
 
 })(window, document);
 </script>

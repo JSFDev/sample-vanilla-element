@@ -36,6 +36,6 @@ module.exports = function (grunt) {
 	
 	extend(gruntConfig.shell, isWindowsOS ? gruntConfig.winShell : gruntConfig.unixShell);
 	grunt.initConfig(gruntConfig);
-  grunt.loadNpmTasks('grunt-shell-spawn');
-  grunt.registerTask('start', ['shell:openProject', 'shell:runProject']);
+	grunt.loadNpmTasks('grunt-shell-spawn');
+	grunt.registerTask('start', ['shell:openProject', 'shell:runProject']);
 };
