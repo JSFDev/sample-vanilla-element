@@ -1,6 +1,6 @@
 {
   "name": "sample-vanilla-element",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Sample custom element in vanilla Javascript",
   "main": "index.js",
   "scripts": {
