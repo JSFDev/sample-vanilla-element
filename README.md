@@ -6,5 +6,12 @@ It allow you to insert a simple title with an copyright description.
 - bower install
 - grunt start
 
-#### Usuage
-binding content through its attributes.
+#### Usuage into project
+npm install sample-vanilla-element
+
+```html
+<sample-vanilla
+	title="web component"
+	copyright="Powered by Company">
+</sample-vanilla>
+```

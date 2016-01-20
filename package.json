@@ -2,10 +2,7 @@
   "name": "sample-vanilla-element",
   "version": "1.0.0",
   "description": "Sample custom element in vanilla Javascript",
-  "main": "index.js",
-  "scripts": {
-    "test": "test"
-  },
+  "main": "index.html",
   "repository": {
     "type": "git",
     "url": "https://github.com/JSFDev/sample-vanilla-element.git"
