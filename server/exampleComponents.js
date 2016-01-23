@@ -1,10 +1,15 @@
-var fileUri = __dirname + (process.argv[3] || "/index.html"),
-    port = Number(process.argv[2]) || 9090,
+var path = require('path'),
+		projectConfig = require('./projectConfig'),
+		nameClient = path.basename(module.filename, '.js'),
+		pathClient = projectConfig.server.getClientPaths(nameClient),
+		serverPort = projectConfig.dev.port,
     express = require('express'),
     app = express(),
     server = require('http').createServer(app);
 
-server.listen(port, console.log.bind(console, 'Node running in http://localhost:' + port));
+server.listen(serverPort, function () {
+	console.log('Node running in ' + projectConfig.dev.getPath());
+});
 
 // Middlewares
 app.use(express.static(__dirname + '/vendors'));
@@ -12,7 +17,7 @@ app.use(express.static(__dirname + '/elements'));
 
 // Routes
 app.get('/',function(req, res){
-    res.sendFile(fileUri);
+    res.sendFile(pathClient);
 });
 
 process.on('SIGTERM', function () {

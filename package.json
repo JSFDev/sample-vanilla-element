@@ -1,14 +1,16 @@
 {
   "name": "sample-vanilla-element",
   "version": "1.0.1",
-  "description": "Sample custom element in vanilla Javascript",
+  "description": "Sample custom elements for vanilla pruposes",
   "main": "index.html",
   "repository": {
     "type": "git",
     "url": "https://github.com/JSFDev/sample-vanilla-element.git"
   },
   "keywords": [
-    "custom elements"
+    "custom elements",
+    "polymer",
+    "shadow dom"
   ],
   "author": "JSFdev",
   "license": "MIT",
@@ -18,6 +20,7 @@
   "devDependencies": {
     "express": "~4.13.3",
     "grunt": "~0.4.5",
-    "grunt-shell-spawn": "~0.3.10"
+    "grunt-shell-spawn": "~0.3.10",
+    "polymer": "Polymer/polymer#1.0.0"
   }
 }

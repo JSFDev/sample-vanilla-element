@@ -3,11 +3,11 @@ module.exports = function (grunt) {
 	var extend = require('util')._extend, 
 		isWindowsOS = /^win/.test(process.platform),
 		gruntConfig = {
-			projectDevPath: 'http://localhost:9000/',
+			project: require('./server/projectConfig'),
 			winShell: {
 				openProject: {
 					command: [
-						'start chrome \"<%= projectDevPath %>\"',
+						'start chrome \"<%= project.dev.getPath() %>\"',
 						'exit'
 					].join('&&')
 				}
@@ -16,7 +16,7 @@ module.exports = function (grunt) {
 				openProject: {
 					command: [
 						'googlePath=$(which google-chrome)',
-						'${googlePath} \"<%= projectDevPath %>\"',
+						'${googlePath} \"<%= project.dev.getPath() %>\"',
 						'exit'
 					].join(' && ')
 				},
@@ -25,17 +25,17 @@ module.exports = function (grunt) {
 				options: {
 					async: true,
 				},
-				runProject: {
-					command: 'node server',
+				runExampleComponents: {
+					command: 'node server/exampleComponents',
 					options: {
 						async: false,
 					}
 				}
 			}
 		};
-	
+
 	extend(gruntConfig.shell, isWindowsOS ? gruntConfig.winShell : gruntConfig.unixShell);
 	grunt.initConfig(gruntConfig);
 	grunt.loadNpmTasks('grunt-shell-spawn');
-	grunt.registerTask('start', ['shell:openProject', 'shell:runProject']);
+	grunt.registerTask('start', ['shell:openProject', 'shell:runExampleComponents']); // --example
 };
