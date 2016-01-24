@@ -1,20 +1,25 @@
+var path = require('path');
+
 module.exports = {
 	server: {
-		relativeRootServer: 'server',
-		relativeRootApp: 'app',
+		relativeRootServer: path.resolve('server'),
+		relativeRootApp: path.resolve('app'),
+		relativeRootVendors: path.resolve('vendors'),
+		relativeRootElements: path.resolve('app/elements'),
 		getClientPaths: function (index) {
 			// LISTA DE RUTAS DE CLIENTE
 			// utilizamos el nombre de los archivos de servidor JS para asignar las rutas de cliente
 			var paths = {
 				exampleComponents: function () {
-					return this.relativeRootApp + "index.html";
-				},
-				default: function () {
-					return this.relativeRootApp + "404.html";
-				} 
+					return this.relativeRootApp + "/index.html";
+				}.bind(this),
+				
+				error: function () {
+					return this.relativeRootApp + "/404.html";
+				}.bind(this) 
 			};
 
-			return paths[index]() || paths['default']();
+			return paths[index]() || paths['error']();
 		}
 	},
 	dev: {

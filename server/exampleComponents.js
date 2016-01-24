@@ -1,7 +1,6 @@
 var path = require('path'),
 		projectConfig = require('./projectConfig'),
 		nameClient = path.basename(module.filename, '.js'),
-		pathClient = projectConfig.server.getClientPaths(nameClient),
 		serverPort = projectConfig.dev.port,
     express = require('express'),
     app = express(),
@@ -12,12 +11,16 @@ server.listen(serverPort, function () {
 });
 
 // Middlewares
-app.use(express.static(__dirname + '/vendors'));
-app.use(express.static(__dirname + '/elements'));
+app.use(express.static(projectConfig.server.relativeRootVendors));
+app.use(express.static(projectConfig.server.relativeRootElements));
 
 // Routes
 app.get('/',function(req, res){
-    res.sendFile(pathClient);
+    res.sendFile(projectConfig.server.getClientPaths(nameClient));
+});
+
+app.get('*',function(req, res){
+    res.sendFile(projectConfig.server.getClientPaths('error'));
 });
 
 process.on('SIGTERM', function () {

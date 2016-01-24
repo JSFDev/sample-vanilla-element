@@ -1,12 +1,15 @@
 ## Custom element in vanilla Javascript
 It allow you to insert a simple title with an copyright description.
 
-#### installation and deployment
-- npm install
-- bower install
-- grunt start
+### Installation and deployment Examples  
+* $npm install
+* $bower install
+* Example all custom elements
+  * $grunt [default,start]
+  * $grunt start --server=[webcomponents,elements]
+* Next Examples
 
-#### Usuage into project
+### Usuage into Your project
 npm install sample-vanilla-element
 
 ```html
