@@ -7,6 +7,8 @@ module.exports = {
 		relativePathApp: path.resolve('app'),
 		relativePathVendors: path.resolve('vendors'),
 		relativePathElements: path.resolve('app/elements'),
+		relativePathScripts: path.resolve('app/scripts'),
+		relativePathStyles: path.resolve('app/styles'),
 		getClientPaths: function (app) {
 			// CLIENT ROUTES
 			// we use the name o the grunt --server option to run the client route

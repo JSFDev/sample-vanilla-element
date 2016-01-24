@@ -12,7 +12,10 @@ server.listen(serverPort, function () {
 
 // Middlewares
 app.use(express.static(projectConfig.server.relativePathVendors));
+app.use(express.static(projectConfig.server.relativePathApp));
 app.use(express.static(projectConfig.server.relativePathElements));
+app.use(express.static(projectConfig.server.relativePathScripts));
+app.use(express.static(projectConfig.server.relativePathStyles));
 
 // Routes
 app.get('/',function(req, res){
@@ -26,6 +29,7 @@ app.get('/',function(req, res){
 });
 
 app.get('*',function(req, res){
+		res.status(404);
     res.sendFile(projectConfig.server.getClientPaths('404'));
 });
 
