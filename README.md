@@ -17,4 +17,9 @@ npm install sample-vanilla-element
 	title="web component"
 	copyright="Powered by Company">
 </sample-vanilla>
+
+<sample-polymer
+	title="web component"
+	copyright="Powered by Company">
+</sample-polymer>
 ```
