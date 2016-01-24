@@ -5,9 +5,9 @@ It allow you to insert a simple title with an copyright description.
 * $npm install
 * $bower install
 * Example all custom elements
-  * $grunt [default,start]
-  * $grunt start --server=[webcomponents,elements]
-* Next Examples
+  * $grunt server --page=webcomponents
+* Example Ecommerce
+	* $grunt server --page=ecommerce
 
 ### Usuage into Your project
 npm install sample-vanilla-element

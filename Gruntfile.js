@@ -1,13 +1,18 @@
 module.exports = function (grunt) {
-	
+	'use strict';
+
 	var extend = require('util')._extend,
 		_ = require('lodash'), 
 		isWindowsOS = /^win/.test(process.platform),
-		userServerOption = grunt.option('server'),
-		// Possible servers (1/2)
-		gruntServerTasks = {
-			webcomponents: ['shell:openProject', 'shell:runExampleComponents'],
-			elements: ['shell:openProject', 'shell:runExampleComponents']
+		userServerOption = grunt.option('page'),
+		gruntServerTasks = ['webcomponents', 'ecommerce'],
+		debugGruntConfig = function () {
+			grunt.log.writeln(JSON.stringify(grunt.config(), null, 2));
+		},
+		executeNodeServer = function (task) {
+				grunt.option('page', task);
+				// debugGruntConfig();
+				grunt.task.run(['shell:openProject', 'shell:runServer']);
 		},
 		gruntConfig = {
 			project: require('./server/projectConfig'),
@@ -32,9 +37,8 @@ module.exports = function (grunt) {
 				options: {
 					async: true,
 				},
-				// Possible servers (2/2)
-				runExampleComponents: {
-					command: 'node server/exampleComponents',
+				runServer: {
+					command: 'node <%= project.server.relativePathServer %>/http <%= grunt.option(\'page\') %>',
 					options: {
 						async: false,
 					}
@@ -47,15 +51,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-shell-spawn');
 
 	// TASKS
-	grunt.registerTask('default', gruntServerTasks.webcomponents);
-	grunt.registerTask('start', function () {
-		var tasks = !_.isUndefined(userServerOption) ? userServerOption : 'webcomponents';
-
-		try {
-			grunt.task.run(gruntServerTasks[tasks]);
-		
-		} catch (err) {
-			grunt.fail.fatal('Aviable servers : $grunt start --server=[' + _.keys(gruntServerTasks) + ']', 5);
-		}
-	});
+	grunt.registerTask('default', executeNodeServer.bind(grunt, 'webcomponents'));
+	grunt.registerTask('server', executeNodeServer.bind(grunt, userServerOption));
 };

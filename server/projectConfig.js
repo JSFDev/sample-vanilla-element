@@ -1,25 +1,35 @@
-var path = require('path');
+var path = require('path'),
+	_ = require('lodash');
 
 module.exports = {
 	server: {
-		relativeRootServer: path.resolve('server'),
-		relativeRootApp: path.resolve('app'),
-		relativeRootVendors: path.resolve('vendors'),
-		relativeRootElements: path.resolve('app/elements'),
-		getClientPaths: function (index) {
-			// LISTA DE RUTAS DE CLIENTE
-			// utilizamos el nombre de los archivos de servidor JS para asignar las rutas de cliente
-			var paths = {
-				exampleComponents: function () {
-					return this.relativeRootApp + "/index.html";
-				}.bind(this),
-				
-				error: function () {
-					return this.relativeRootApp + "/404.html";
-				}.bind(this) 
-			};
+		relativePathServer: path.resolve('server'),
+		relativePathApp: path.resolve('app'),
+		relativePathVendors: path.resolve('vendors'),
+		relativePathElements: path.resolve('app/elements'),
+		getClientPaths: function (app) {
+			// CLIENT ROUTES
+			// we use the name o the grunt --server option to run the client route
+			var appName = _.isString(app) && _.indexOf(['0', 'true', 'false'], app) === -1 ? app : 'error',
+				paths = {
+					ecommerce: function () {
+						return this.relativePathApp + "/ecommerce.html";
+					}.bind(this),
 
-			return paths[index]() || paths['error']();
+					webcomponents: function () {
+						return this.relativePathApp + "/webcomponents.html";
+					}.bind(this),
+
+					'404': function () {
+						return this.relativePathApp + "/404.html";
+					}.bind(this),
+					
+					error: function () {
+						throw {msg : 'Aviable servers : $grunt server --page=[' + Object.keys(paths) + ']'};
+					}.bind(this) 
+				};
+
+			return (paths[appName] || paths.error)();
 		}
 	},
 	dev: {

@@ -1,6 +1,6 @@
 var path = require('path'),
 		projectConfig = require('./projectConfig'),
-		nameClient = path.basename(module.filename, '.js'),
+		nameClient = process.argv[2],
 		serverPort = projectConfig.dev.port,
     express = require('express'),
     app = express(),
@@ -11,16 +11,22 @@ server.listen(serverPort, function () {
 });
 
 // Middlewares
-app.use(express.static(projectConfig.server.relativeRootVendors));
-app.use(express.static(projectConfig.server.relativeRootElements));
+app.use(express.static(projectConfig.server.relativePathVendors));
+app.use(express.static(projectConfig.server.relativePathElements));
 
 // Routes
 app.get('/',function(req, res){
+	try	{
     res.sendFile(projectConfig.server.getClientPaths(nameClient));
+
+	} catch (err) {
+		console.error(err.msg);
+		process.exit(1);
+	}
 });
 
 app.get('*',function(req, res){
-    res.sendFile(projectConfig.server.getClientPaths('error'));
+    res.sendFile(projectConfig.server.getClientPaths('404'));
 });
 
 process.on('SIGTERM', function () {
