@@ -21,13 +21,11 @@
     "tests"
   ],
   "devDependencies": {
-    "webcomponentsjs": "~0.7.20",
-    "polymer": "Polymer/polymer#^1.0.0",
+    "polymer": "Polymer/polymer#^1.2.0",
     "iron-elements": "PolymerElements/iron-elements#^1.0.0",
     "neon-elements": "PolymerElements/neon-elements#^1.0.0",
     "page": "visionmedia/page.js#~1.6.4",
     "paper-elements": "PolymerElements/paper-elements#^1.0.1",
-    "platinum-elements": "PolymerElements/platinum-elements#^1.1.0",
     "google-map": "GoogleWebComponents/google-map#~1.1.8",
     "iron-selector": "PolymerElements/iron-selector#~1.0.8",
     "iron-list": "PolymerElements/iron-list#~1.1.7",

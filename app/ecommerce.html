@@ -26,11 +26,10 @@
 
   <link rel="stylesheet" href="styles/main.css">
   <script src="webcomponentsjs/webcomponents.min.js"></script>
-  <link rel="import" href="elements/ecommerce.html">
+  <link rel="import" href="elements/includes/ecommerce.html">
 </head>
 
 <body unresolved>
-  <span id="browser-sync-binding"></span>
   <template is="dom-bind" id="app">
 
     <paper-drawer-panel id="paperDrawerPanel">
@@ -184,24 +183,6 @@
     <paper-toast id="toast">
       <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
     </paper-toast>
-
-    <!-- Uncomment next block to enable Service Worker support (1/2) -->
-    <paper-toast  id="caching-complete"
-                  duration="5000"
-                  text="Caching complete! This app will work offline.">
-    </paper-toast>
-
-    <platinum-sw-register auto-register
-                          clients-claim
-                          skip-waiting
-                          base-uri="bower_components/platinum-sw/bootstrap"
-                          on-service-worker-installed="displayInstalledToast">
-      <platinum-sw-cache default-cache-strategy="networkFirst"
-                         cache-config-file="cache-config.json">
-      </platinum-sw-cache>
-    </platinum-sw-register>
-
-
   </template>
 
   <script src="scripts/uiEvents.js"></script>
