@@ -1,13 +1,25 @@
 module.exports = function (grunt) {
-	
-	var extend = require('util')._extend, 
+	'use strict';
+
+	var extend = require('util')._extend,
+		_ = require('lodash'), 
 		isWindowsOS = /^win/.test(process.platform),
+		userServerOption = grunt.option('page'),
+		gruntServerTasks = ['webcomponents', 'ecommerce'],
+		debugGruntConfig = function () {
+			grunt.log.writeln(JSON.stringify(grunt.config(), null, 2));
+		},
+		executeNodeServer = function (task) {
+				grunt.option('page', task);
+				// debugGruntConfig();
+				grunt.task.run(['shell:openProject', 'shell:runServer']);
+		},
 		gruntConfig = {
-			projectDevPath: 'http://localhost:9000/',
+			project: require('./server/projectConfig'),
 			winShell: {
 				openProject: {
 					command: [
-						'start chrome \"<%= projectDevPath %>\"',
+						'start chrome \"<%= project.dev.getPath() %>\"',
 						'exit'
 					].join('&&')
 				}
@@ -16,7 +28,7 @@ module.exports = function (grunt) {
 				openProject: {
 					command: [
 						'googlePath=$(which google-chrome)',
-						'${googlePath} \"<%= projectDevPath %>\"',
+						'${googlePath} \"<%= project.dev.getPath() %>\"',
 						'exit'
 					].join(' && ')
 				},
@@ -25,17 +37,20 @@ module.exports = function (grunt) {
 				options: {
 					async: true,
 				},
-				runProject: {
-					command: 'node server',
+				runServer: {
+					command: 'node <%= project.server.relativePathServer %>/http <%= grunt.option(\'page\') %>',
 					options: {
 						async: false,
 					}
 				}
 			}
 		};
-	
+
 	extend(gruntConfig.shell, isWindowsOS ? gruntConfig.winShell : gruntConfig.unixShell);
 	grunt.initConfig(gruntConfig);
 	grunt.loadNpmTasks('grunt-shell-spawn');
-	grunt.registerTask('start', ['shell:openProject', 'shell:runProject']);
+
+	// TASKS
+	grunt.registerTask('default', executeNodeServer.bind(grunt, 'webcomponents'));
+	grunt.registerTask('server', executeNodeServer.bind(grunt, userServerOption));
 };

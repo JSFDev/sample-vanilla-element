@@ -1,0 +1,36 @@
+<link rel="import" href="./../../polymer/polymer.html"/>
+
+<dom-module id="appartment-list">
+  <template>
+    <style>
+      .appartment-widget__name {
+        color: blue;
+      }
+    </style>
+
+    <div class="appartment-list">
+      <div class="appartment-widget">
+        <span class="appartment-widget__name">{{ appartmentStreet }}</span>
+      </div>
+    </div>
+  </template>
+
+  <script src="appartment-list.behavior.liveCycle.js"></script>
+  <script src="appartment-list.prototype.js"></script>
+  <script>
+  	//document.addEventListener('polymer-ready', function() {
+  	document.body.onload = function () {
+	    var  appartment1 = new window.AppartmentList('Andrea Doria', ['agua', 'gas', 'electricidad']);
+	    console.log(appartment1.getAllInstalaciones());
+
+	    var appartmentListFilter =  document.querySelector('#appartment-list-filters').content,
+	    		appartment2 = appartmentListFilter.querySelectorAll('appartment-list')[0];
+
+	    // sobreescribir behaviours
+	    // appartment2.printBehaviors();
+
+	    // eliminar un WC del dom
+	    // appartment2.parentNode.removeChild(appartment2);
+    };
+  </script>
+</dom-module>

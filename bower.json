@@ -1,14 +1,15 @@
 {
   "name": "sample-vanilla-element",
-  "version": "0.0.0",
+  "private": true,
   "homepage": "https://github.com/JSFDev/sample-vanilla-element",
   "authors": [
     "info@jsdev.cruzalosdedos.es"
   ],
-  "description": "Sample custom element in vanilla Javascript",
-  "main": "index.html",
+  "description": "Sample custom element in vanilla JS and polymer",
   "keywords": [
-    "components"
+    "web components",
+    "polymer",
+    "vanilla"
   ],
   "license": "MIT",
   "ignore": [
@@ -20,6 +21,14 @@
     "tests"
   ],
   "devDependencies": {
-    "webcomponentsjs": "~0.7.20"
+    "polymer": "Polymer/polymer#^1.2.0",
+    "iron-elements": "PolymerElements/iron-elements#^1.0.0",
+    "neon-elements": "PolymerElements/neon-elements#^1.0.0",
+    "page": "visionmedia/page.js#~1.6.4",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.1",
+    "google-map": "GoogleWebComponents/google-map#~1.1.8",
+    "iron-selector": "PolymerElements/iron-selector#~1.0.8",
+    "iron-list": "PolymerElements/iron-list#~1.1.7",
+    "paper-fab": "PolymerElements/paper-fab#~1.1.2"
   }
 }
