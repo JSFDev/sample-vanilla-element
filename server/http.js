@@ -1,6 +1,6 @@
 var path = require('path'),
 		projectConfig = require('./projectConfig'),
-		nameClient = process.argv[2],
+		nameClient = process.argv[2], // grunt shell:runServer
 		serverPort = projectConfig.dev.port,
     express = require('express'),
     app = express(),
@@ -11,8 +11,8 @@ server.listen(serverPort, function () {
 });
 
 // Middlewares
-app.use(express.static(projectConfig.server.relativePathVendors));
 app.use(express.static(projectConfig.server.relativePathApp));
+app.use(express.static(projectConfig.server.relativePathVendors));
 
 // Routes
 app.get('/',function(req, res){
